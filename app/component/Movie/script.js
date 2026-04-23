@@ -1,25 +1,32 @@
+
 let templateFile = await fetch("./component/Movie/template.html");
 let template = await templateFile.text();
 
+let templateLiFile = await fetch("./component/Movie/templateLi.html");
+let templateLi = await templateLiFile.text();
+
 let Movie = {};
 
-Movie.format = function (movie) {
-  let html = template;
-  html = html.replaceAll("{{id}}", movie.id);
-  html = html.replaceAll("{{name}}", movie.name);
-  html = html.replaceAll("{{image}}", movie.image);
-  return html;
-};
-
-Movie.formatMany = function (movies) {
-  let html = "";
-  if (movies.length == 0) {
-    return `Aucun film disponible pour le moment`;
+Movie.format = function (data) {
+  let htmlConteneur = template;
+  
+  if (data.length == 0) {
+    return htmlConteneur.replace(
+      "{{movie}}",
+      "<p class='movies_error'>Aucun film disponible pour le moment.</p>"
+    );
+  } else {
+    let htmlMovie = "";
+    
+    for (let movie of data) {
+      let htmlItem = templateLi;
+      htmlItem = htmlItem.replaceAll("{{name}}", movie.name);
+      htmlItem = htmlItem.replaceAll("{{image}}","../server/images/" + movie.image);
+      htmlMovie += htmlItem;
+    }
+    
+    return htmlConteneur.replace("{{movie}}", htmlMovie);
   }
-  for (const movie of movies) {
-    html += Movie.format(movie);
-  }
-  return html;
 };
 
 export { Movie };
