@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
   <head>
     <title>SAE2.03 APP</title>
@@ -10,12 +10,10 @@
   <body>
     <header id="header"></header>
 
-    <section id="content"></section>
+    <section id="movie-list-container"></section>
 
     <script type="module">
-      
       import { NavBar } from "./component/NavBar/script.js";
-     
 
       // Controleur
       // Rappel, écrire window.C plutôt que let C est nécessaire pour tester depuis la console du navigateur
@@ -24,7 +22,7 @@
 
       C.handlerAbout = function () {
         alert(
-          "Ceci est une base de projet pour la SAE2.03 édition 2025. Bonne chance !"
+          "Ceci est une base de projet pour la SAE2.03 édition 2025. Bonne chance !",
         );
       };
 
@@ -49,6 +47,25 @@
 
       C.start(); // Démarre l'application
     </script>
+
+    <script type="module">
+      import { DataMovie } from "./data/dataMovie.js";
+      import { Movie } from "./component/Movie/script.js";
+
+      window.C = {};
+      window.V = {};
+
+      C.start = async function () {
+        let data = await DataMovie.requestMovies();
+        V.renderMovies(data);
+      };
+
+      V.renderMovies = function (movies) {
+       let content = document.querySelector("#movie-list-container")
+       content.innerHTML = Movie.formatMany(movies);
+      };
+
+      C.start();
+    </script>
   </body>
 </html>
-<script type="module"></script>

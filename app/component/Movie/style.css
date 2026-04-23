@@ -1,0 +1,19 @@
+@layer components {
+  #movie-list-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .movie-card {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  }
+
+  .movie-card__img {
+    width: 100%;
+    aspect-ratio: 2/3;
+    object-fit: cover;
+  }
+}
