@@ -23,10 +23,9 @@ function getAllMovies(){
     // Connexion à la base de données
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
     // Requête SQL pour récupérer le menu avec des paramètres
-    $sql = "select Movie.id, Movie.name,  Movie.image, Movie.id_category, Category.name as label from Movie INNER JOIN Category ON Category.id = Movie.id_category WHERE min_age <= :min_age ORDER BY Category.name";
+    $sql = "select Movie.id, Movie.name, Movie.image, Movie.id_category, Category.name as label from Movie INNER JOIN Category ON Category.id = Movie.id_category ORDER BY Category.name";
     // Prépare la requête SQL
     $stmt = $cnx->prepare($sql);
-    $stmt->bindParam(':min_age', $min_age);
     // Exécute la requête SQL
     $stmt->execute();
     // Récupère les résultats de la requête sous forme d'objets

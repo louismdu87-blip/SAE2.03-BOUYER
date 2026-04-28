@@ -17,6 +17,7 @@
       import { NavBar } from "./component/NavBar/script.js";
       import { Movie } from "./component/Movies/script.js";
       import { MovieDetail } from "./component/MovieDetail/script.js";
+      import { MovieCategory } from "./component/MovieCategory/script.js";
 
       let data = await DataMovie.requestMovies();
 
@@ -46,7 +47,7 @@
 
       C.start = function () {
         V.renderNavBar("C.handlerAbout()", "C.handlerFilms()");
-        V.renderMovies(data);
+        V.renderMoviesCategory(data);
       };
 
       // Vue (contient tout ce qui est relatif à l'affichage)

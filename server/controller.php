@@ -22,8 +22,19 @@ require("model.php");
 
 
 function readMoviesController(){
-    $movies = getAllMovies();
-    return $movies;
+    $moviesList = getAllMovies();
+    $groupedMovies = [];
+    
+    foreach($moviesList as $movie){
+        $catName = $movie->label; 
+        
+        if(!isset($groupedMovies[$catName])){
+            $groupedMovies[$catName] = [];
+        }
+        $groupedMovies[$catName][] = $movie;
+    }
+    
+    return $groupedMovies;
 }
 
 function addMoviesController(){
