@@ -24,7 +24,7 @@
 }
 
 
-@media (min-width: 600px) {
+@media (min-width: 37.5rem) {
   .movie-list {
     grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
@@ -34,8 +34,7 @@
   }
 }
 
-
-@media (min-width: 900px) {
+@media (min-width: 56rem) {
   .movie-list {
     grid-template-columns: repeat(4, 1fr);
     gap : 2rem;

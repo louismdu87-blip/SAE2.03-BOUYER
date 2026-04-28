@@ -13,9 +13,10 @@
     <section id="movie-list-container"></section>
 
     <script type="module">
-      import { NavBar } from "./component/NavBar/script.js";
       import { DataMovie } from "./data/dataMovie.js";
-      import { Movie } from "./component/Movie/script.js";
+      import { NavBar } from "./component/NavBar/script.js";
+      import { Movie } from "./component/Movies/script.js";
+      import { MovieDetail } from "./component/MovieDetail/script.js";
 
       let data = await DataMovie.requestMovies();
 
@@ -30,10 +31,22 @@
         );
       };
 
+      C.handlerFilms = function () {
+         V.renderMovies(data);
+      };
+
+        C.handlerMovieDetail = async function (id) {
+        let selectedMovie= await DataMovie.requestMovieDetails(id);
+        if (selectedMovie) {
+          V.renderMovieDetail(selectedMovie);
+        }
+      };
+
+
+
       C.start = function () {
-        V.renderNavBar("C.handlerAbout()");
+        V.renderNavBar("C.handlerAbout()", "C.handlerFilms()");
         V.renderMovies(data);
-        
       };
 
       // Vue (contient tout ce qui est relatif à l'affichage)
@@ -46,18 +59,24 @@
        * Elle sélectionne l'élément HTML avec l'ID "header" et y insère le contenu
        * formaté par le composant NavBar.
        */
-      V.renderNavBar = function (hAbout) {
+      V.renderNavBar = function (hAbout, hFilms) {
         let header = document.querySelector("#header");
-        header.innerHTML = NavBar.format(hAbout);
+        header.innerHTML = NavBar.format(hAbout, hFilms);
       };
 
-       V.renderMovies = function (movies) {
-       let content = document.querySelector("#movie-list-container")
-       content.innerHTML = Movie.format(data);
+
+      V.renderMovies = function (movies) {
+        let content = document.querySelector("#movie-list-container");
+        content.innerHTML = Movie.format(movies);
       };
 
-      C.start(); // 
+      V.renderMovieDetail = function (data) {
+        let content = document.querySelector("#movie-list-container");
+        content.innerHTML = MovieDetail.format(data);
+      };
+
+      C.start();
     </script>
-
   </body>
 </html>
+

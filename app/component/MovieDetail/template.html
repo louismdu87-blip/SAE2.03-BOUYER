@@ -1,0 +1,43 @@
+<div class="movieDetail">
+  <header class="movieDetail__header">
+    <h1 class="movieDetail__title">{{name}}</h1>
+  </header>
+
+  <div class="movieDetail__content">
+    <div class="movieDetail__poster">
+      <img src={{poster}} alt="Affiche de {{name}}" />
+    </div>
+
+    <div class="movieDetail__info">
+      <p><strong>Catégorie:</strong> {{category}}</p>
+      <p><strong>Durée:</strong> {{length}} minutes</p>
+      <p><strong>Date de sortie:</strong>{{year}}</p>
+      <p><strong>Réalisateur:</strong> {{director}}</p>
+      <p><strong>Âge minimum:</strong> {{min_age}} ans</p>
+
+      <div class="movieDetail__synopsis">
+        <p>{{description}}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="movieDetail__trailer">
+    <div class="video-container">
+      <iframe
+        src="{{trailer}}"
+        title="YouTube video player"
+        frameborder="0"
+        allow="
+          accelerometer;
+          autoplay;
+          clipboard-write;
+          encrypted-media;
+          gyroscope;
+          picture-in-picture;
+        "
+        allowfullscreen
+      >
+      </iframe>
+    </div>
+  </div>
+</div>

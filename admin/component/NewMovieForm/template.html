@@ -1,0 +1,48 @@
+<div class="addMovie">
+  <h4 class="addMovie__title"># Ajouter ou modifier un film</h4>
+  <form class="addMovie__form">
+    
+    <label>Titre du film :</label>
+    <input required type="text" name="name" placeholder="Saisir le titre du film" />
+
+
+
+    <label>Année de sortie :</label>
+    <input required type="number" name="year" placeholder="Saisir la date de sortie du film"/>
+
+    <label>Durée (en minutes) :</label>
+    <input required type="number" name="length" placeholder="Ex: 120" />
+
+    <label>Synopsis :</label>
+    <textarea required name="description" placeholder="Saisir le synopsis du film"></textarea>
+    
+    <label>Réalisateur :</label>
+    <input required type="text" name="director" placeholder="Saisir le nom du réalisateur" pattern="[^0-9]*" title="Number are not allowed " />
+
+    <label>Catégorie :</label>
+    <select name="id_category">
+      <option value="1">Action</option>
+      <option value="2">Comédie</option>
+      <option value="3">Drame</option>
+      <option value="4">Science-fiction</option>
+      <option value="5">Animation</option>
+      <option value="6">Thriller</option>
+      <option value="7">Hprreur</option>
+      <option value="8">Aventure</option>
+      <option value="9">Fantaisie</option>
+      <option value="10">Documentaire</option>
+    </select>
+
+    <label>Affiche :</label>
+    <input required type="text" name="image" placeholder="Saisir le nom du fichier (ex: affiche.jpg)" />
+
+    <label>URL du Trailer :</label>
+    <input required type="url" name="trailer" placeholder=" Ex: https://youtube.com/..." />
+
+    <label>Restriction d'âge :</label>
+    <input required type="number" name="min_age" placeholder="Ex: 12"/>
+
+    <input onclick="{{handler}}" type="button" value="Ajouter le film" name="todo" class="btn-submit" />
+    
+  </form>
+</div>

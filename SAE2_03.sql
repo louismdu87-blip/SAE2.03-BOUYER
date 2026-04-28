@@ -2,8 +2,7 @@
 -- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
--- Hôte : localhost:8889
--- Généré le : ven. 28 mars 2025 à 18:01
+-- Hôte : localhost:8889   
 -- Version du serveur :  5.7.34
 -- Version de PHP : 8.0.8
 

@@ -1,0 +1,46 @@
+.addMovie {
+  max-width: 50rem;
+  margin: 2rem auto;
+  padding: 1rem;
+  font-family: sans-serif;
+}
+.addMovie__title {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+.addMovie__form {
+  display: grid;
+  gap: 1rem;
+  align-items: center;
+}
+.addMovie__form input,
+.addMovie__form select,
+.addMovie__form textarea {
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 0.2rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+.btn-submit {
+  background: #000;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  padding: 0.8rem;
+  font-weight: bold;
+}
+@media (min-width: 48rem) {
+  .addMovie__form {
+    grid-template-columns: 10rem 1fr;
+  }
+  .addMovie__form label {
+    text-align: right;
+    padding-right: 1rem;
+  }
+  .btn-submit {
+    grid-column: 2;
+    justify-self: start;
+    padding: 0.8rem 3rem;
+  }
+}
