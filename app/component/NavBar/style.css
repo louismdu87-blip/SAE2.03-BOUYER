@@ -20,3 +20,9 @@
     }
   }
 }
+
+.navbar__list{
+  display: flex;
+  flex-direction: row;
+}
+

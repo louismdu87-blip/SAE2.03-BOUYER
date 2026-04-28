@@ -32,7 +32,7 @@
       };
 
       C.handlerFilms = function () {
-         V.renderMovies(data);
+         V.renderMoviesCategory(data);
       };
 
         C.handlerMovieDetail = async function (id) {
@@ -68,6 +68,18 @@
       V.renderMovies = function (movies) {
         let content = document.querySelector("#movie-list-container");
         content.innerHTML = Movie.format(movies);
+      };
+
+      V.renderMoviesCategory = function (groupedMovies) {
+        let content = document.querySelector("#movie-list-container");
+        let finalHtml = "";
+        for (let categoryName in groupedMovies) {
+          let moviesList = groupedMovies[categoryName];
+          let moviesHtml = Movie.format(moviesList);
+          finalHtml += MovieCategory.format(categoryName, moviesHtml);
+        }
+
+        content.innerHTML = finalHtml;
       };
 
       V.renderMovieDetail = function (data) {

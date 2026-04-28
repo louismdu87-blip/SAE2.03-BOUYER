@@ -46,6 +46,11 @@ function addMoviesController(){
     }
 }
 
+function readCategoryController(){
+    $category = getAllCategories();
+    return $category;
+}
+
 function readMovieDetailController(){
 if(isset($_REQUEST['id'])){
         $id = $_REQUEST['id'];
@@ -53,3 +58,4 @@ if(isset($_REQUEST['id'])){
     }
     return false;
 }
+

@@ -11,6 +11,7 @@ Movie.format = function (data) {
   let htmlConteneur = template;
   
   if (data.length == 0) {
+      let html = "";
       html = html.replace ("{{movie}}",
       "<p class='movies_error'>Aucun film disponible pour le moment.</p>");
     
