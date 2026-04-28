@@ -56,6 +56,20 @@ function addMovie($n, $y, $l, $de, $d, $c, $im, $url, $min){
 }
 
 
+function addProfile($name, $url, $age) {
+    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+    $sql = "INSERT INTO Profile (name, avatar, min_age) 
+            VALUES (:name, :url, :age)";
+    $stmt = $cnx->prepare($sql);
+    $stmt->bindParam(':name', $name);
+    $stmt->bindParam(':url', $url);
+    $stmt->bindParam(':age', $age);
+    $stmt->execute();
+    $res = $stmt->rowCount();
+    return $res;
+}
+
+
 function getAllCategories() {
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
     $sql = "SELECT id, name FROM Category"; 

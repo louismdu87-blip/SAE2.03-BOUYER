@@ -57,6 +57,26 @@ function addMoviesController(){
     }
 }
 
+
+function addProfileController(){
+    $name = $_REQUEST['name'];
+    $url = $_REQUEST['avatar'];
+    $age = $_REQUEST['age'];
+
+    if(empty($url)){
+        $url = "placeholderProfile.svg";
+    }
+
+    $ok = addProfile($name, $url, $age);
+    if($ok != 0){
+        return "Le profile de $name a été ajouté";
+    }
+    else{
+        return false;
+    }
+}
+
+
 function readCategoryController(){
     $category = getAllCategories();
     return $category;
