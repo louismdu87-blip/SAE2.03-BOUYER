@@ -76,6 +76,10 @@ function addProfileController(){
     }
 }
 
+function readProfilesController() {
+    return getAllProfiles();
+}
+
 
 function readCategoryController(){
     $category = getAllCategories();

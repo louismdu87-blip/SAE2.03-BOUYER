@@ -14,12 +14,18 @@
 
     <script type="module">
       import { DataMovie } from "./data/dataMovie.js";
+      import { DataProfile } from "./data/dataProfile.js";
       import { NavBar } from "./component/NavBar/script.js";
       import { Movie } from "./component/Movies/script.js";
       import { MovieDetail } from "./component/MovieDetail/script.js";
       import { MovieCategory } from "./component/MovieCategory/script.js";
 
+
+      //variables globales
       let data = await DataMovie.requestMovies();
+      let profiles = await DataProfile.requestProfiles();
+      let movies = null;
+      let currentProfileId = null;
 
       // Controleur
       // Rappel, écrire window.C plutôt que let C est nécessaire pour tester depuis la console du navigateur
@@ -33,21 +39,42 @@
       };
 
       C.handlerFilms = function () {
-         V.renderMoviesCategory(data);
+        V.renderMoviesCategory(data);
       };
 
-        C.handlerMovieDetail = async function (id) {
-        let selectedMovie= await DataMovie.requestMovieDetails(id);
+      C.handlerMovieDetail = async function (id) {
+        let selectedMovie = await DataMovie.requestMovieDetails(id);
         if (selectedMovie) {
           V.renderMovieDetail(selectedMovie);
         }
       };
 
+      C.handlerSelectProfile = async function () {
+  
+        currentProfileId = document.querySelector(".navbar__select").value;
+        let content = document.querySelector("#movie-list-container"); 
+        
+        if (!currentProfileId) {
+            content.innerHTML = "<h2 style='text-align:center; margin-top:3rem;'>Veuillez sélectionner un profil en haut.</h2>";
+            return;
+        }
+        
+        let profileSelected = profiles.find(p => p.id == currentProfileId);
+        movies = await DataMovie.requestMovies(profileSelected.min_age);
+        V.renderMoviesCategory(movies, "C.handlerMovieDetail");
+      };
+
+    
+      C.handlerLogOut = function () {
+        document.querySelector(".navbar__select").value = ""; 
+        currentProfileId = null; 
+        C.handlerSelectProfile(); 
+      };
 
 
       C.start = function () {
-        V.renderNavBar("C.handlerAbout()", "C.handlerFilms()");
-        V.renderMoviesCategory(data);
+        V.renderNavBar("C.handlerAbout()", "C.handlerFilms()", "C.handlerSelectProfile()", profiles, "C.handlerLogOut()");
+        C.handlerSelectProfile();
       };
 
       // Vue (contient tout ce qui est relatif à l'affichage)
@@ -60,11 +87,10 @@
        * Elle sélectionne l'élément HTML avec l'ID "header" et y insère le contenu
        * formaté par le composant NavBar.
        */
-      V.renderNavBar = function (hAbout, hFilms) {
+      V.renderNavBar = function (hAbout, hFilms, handlerSelect, data, handlerLogOut) {
         let header = document.querySelector("#header");
-        header.innerHTML = NavBar.format(hAbout, hFilms);
+        header.innerHTML = NavBar.format(hAbout, hFilms, handlerSelect, data, handlerLogOut);
       };
-
 
       V.renderMovies = function (movies) {
         let content = document.querySelector("#movie-list-container");
@@ -92,4 +118,3 @@
     </script>
   </body>
 </html>
-
