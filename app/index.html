@@ -39,7 +39,12 @@
       };
 
       C.handlerFilms = function () {
-        V.renderMoviesCategory(data);
+        if (!currentProfileId) {
+          alert("Veuillez d'abord sélectionner un profil en haut à droite !");
+          return;
+        }
+
+        V.renderMoviesCategory(movies, "C.handlerMovieDetail");
       };
 
       C.handlerMovieDetail = async function (id) {

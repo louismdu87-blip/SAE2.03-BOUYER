@@ -29,7 +29,10 @@
           let res = await DataMovie.add(fd);
           V.renderLog(res);
         }
+        else {
+          V.renderLog("il y a une erreur dans le formulaire de film");
       };
+      }
 
        C.handlerAddProfile = async function () {
         let form = document.querySelector(".form__addprofile");
@@ -38,6 +41,9 @@
         let res = await DataProfile.addprofile(fd);
         V.renderLog(res);
         }
+        else {
+          V.renderLog("il y a une erreur dans le formulaire de profil");
+      };
       }
       C.start = function () {
         V.renderLog("Démarrage de l'application");

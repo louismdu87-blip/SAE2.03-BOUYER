@@ -81,6 +81,8 @@ function readProfilesController() {
 }
 
 
+
+
 function readCategoryController(){
     $category = getAllCategories();
     return $category;

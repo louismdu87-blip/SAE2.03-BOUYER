@@ -16,7 +16,7 @@ NavBar.format = function (hAbout, hFilms, handlerSelect, data, handlerLogOut) {
   let htmlProfile = "";
 
 
-  if (data && Array.isArray(data)) {
+  if (data && Array.isArray(data)) {    
     for (let profileData of data) {
       let profile = templateProfile;
       profile = profile
@@ -32,3 +32,4 @@ NavBar.format = function (hAbout, hFilms, handlerSelect, data, handlerLogOut) {
 };
 
 export { NavBar };
+
