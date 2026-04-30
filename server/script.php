@@ -62,7 +62,8 @@ if ( isset($_REQUEST['todo']) ){
   switch($todo){
 
     case 'readmovies':
-      $data = readMoviesController();
+      $age = isset($_REQUEST['age']) ? intval($_REQUEST['age']) : 0;  // force la valeur en entier par sécurité
+      $data = readMoviesController($age);
       break;
     
     case 'readcategory':

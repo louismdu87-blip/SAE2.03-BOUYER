@@ -21,7 +21,11 @@ define("DBPWD", "bouyer17");
 
 function getAllMovies($age = 0) {
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
-    $sql = "SELECT * FROM Movie WHERE min_age <= :age";
+    $sql = "SELECT Movie.*, Category.name AS label 
+            FROM Movie 
+            INNER JOIN Category ON Movie.id_category = Category.id 
+            WHERE Movie.min_age <= :age";
+            
     $stmt = $cnx->prepare($sql);
     $stmt->bindParam(':age', $age, PDO::PARAM_INT);
     $stmt->execute();

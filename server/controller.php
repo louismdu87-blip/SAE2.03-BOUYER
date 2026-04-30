@@ -21,8 +21,8 @@
 require("model.php");
 
 
-function readMoviesController(){
-    $moviesList = getAllMovies();
+function readMoviesController($age = 0){
+    $moviesList = getAllMovies($age); 
     $groupedMovies = [];
     
     foreach($moviesList as $movie){
