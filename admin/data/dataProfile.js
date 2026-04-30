@@ -2,6 +2,8 @@ let HOST_URL = "https://mmi.unilim.fr/~bouyer17/SAE2.03-BOUYER"; // CHANGE THIS 
 
 let DataProfile = {};
 
+
+
 DataProfile.addprofile = async function(fdata){
     let config = {
         method: "POST",
@@ -13,3 +15,4 @@ DataProfile.addprofile = async function(fdata){
 }
 
 export {DataProfile};
+
