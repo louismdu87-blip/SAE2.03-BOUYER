@@ -69,23 +69,7 @@
   height: 100%;
 }
 
-.btn-favorite {
-    background-color: #e50914; /* Rouge type Netflix */
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
 
-.btn-favorite:hover {
-    background-color: #b20710;
-}
-
-/* --- VERSION DESKTOP (Affiche à gauche, Texte à droite) --- */
 @media (min-width: 48rem) {
   .movieDetail__content {
     flex-direction: row; 
