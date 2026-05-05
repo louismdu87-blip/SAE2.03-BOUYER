@@ -87,8 +87,6 @@ function getAllCategories() {
 }
 
 
-
-
 function getMovieDetail($id){
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
     $sql = "select Category.name as label, Movie.* from Movie INNER JOIN Category ON Category.id = Movie.id_category WHERE Movie.id = :id";
@@ -97,4 +95,37 @@ function getMovieDetail($id){
     $stmt->execute();
     $res = $stmt->fetch(PDO::FETCH_OBJ);
     return $res;
+}
+
+function addFavorite($profile, $movie) {
+    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+    $sql = "INSERT IGNORE INTO Favoris (id_profile, id_movie) VALUES (:profile, :movie)";
+    $stmt = $cnx->prepare($sql);
+    $stmt->bindParam(':profile', $profile);
+    $stmt->bindParam(':movie', $movie);
+    $stmt->execute();
+    return $stmt->rowCount();
+}
+
+function deleteFavorite($profile, $movie) {
+    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+    $sql = "DELETE FROM Favoris WHERE id_profile = :profile AND id_movie = :movie";
+    $stmt = $cnx->prepare($sql);
+    $stmt->bindParam(':profile', $profile);
+    $stmt->bindParam(':movie', $movie);
+    $stmt->execute();
+    return $stmt->rowCount();
+}
+
+
+function getFavoritesByProfile($profile) {
+    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+    $sql = "SELECT Movie.*, Category.name AS label FROM Movie 
+            INNER JOIN Favoris ON Movie.id = Favoris.id_movie
+            LEFT JOIN Category ON Movie.id_category = Category.id
+            WHERE Favoris.id_profile = :profile";
+    $stmt = $cnx->prepare($sql);
+    $stmt->bindParam(':profile', $profile);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ);
 }

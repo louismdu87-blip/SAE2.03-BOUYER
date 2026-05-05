@@ -51,8 +51,19 @@
 
       C.handlerMovieDetail = async function (id) {
         let selectedMovie = await DataMovie.requestMovieDetails(id);
+        let isFav = false;
+        if (currentProfileId) {
+            let favorites = await DataMovie.readFavorites(currentProfileId);
+            if (favorites.length > 0 && favorites[0].id) {
+                let found = favorites.find(m => m.id == id);
+                if (found) {
+                    isFav = true;
+                }
+            }
+        }
+
         if (selectedMovie) {
-          V.renderMovieDetail(selectedMovie);
+          V.renderMovieDetail(selectedMovie, isFav);
         }
       };
 
@@ -78,10 +89,42 @@
         C.handlerSelectProfile();
       };
 
+     C.handlerFavorites = async function () {
+        if (!currentProfileId) {
+          alert("Veuillez sélectionner un profil pour voir vos favoris.");
+          return;
+        }
+        let movies = await DataMovie.readFavorites(currentProfileId);
+        if (movies.length == 0) {
+          document.querySelector("#movie-list-container").innerHTML =
+            "<p>Votre liste de favoris est vide.</p>";
+          return;
+        }
+        V.renderMovies(movies);
+      };
+
+      C.handlerAddFavorite = async function (id_movie) {
+        if (!currentProfileId) {
+          alert("Veuillez sélectionner un profil avant d'ajouter un favori.");
+          return;
+        }
+        let result = await DataMovie.addFavorite(currentProfileId, id_movie);
+        alert(result);
+        
+        C.handlerMovieDetail(id_movie);
+      };
+
+      C.handlerDeleteFavorite = async function (id_movie) {
+        let result = await DataMovie.deleteFavorite(currentProfileId, id_movie);
+        alert(result);
+        C.handlerMovieDetail(id_movie);
+      };
+
       C.start = function () {
         V.renderNavBar(
           "C.handlerAbout()",
           "C.handlerFilms()",
+          "C.handlerFavorites()",
           "C.handlerSelectProfile()",
           profiles,
           "C.handlerLogOut()",
@@ -102,6 +145,7 @@
       V.renderNavBar = function (
         hAbout,
         hFilms,
+        hFavorites,
         handlerSelect,
         data,
         handlerLogOut,
@@ -110,6 +154,7 @@
         header.innerHTML = NavBar.format(
           hAbout,
           hFilms,
+          hFavorites,
           handlerSelect,
           data,
           handlerLogOut,
@@ -133,10 +178,11 @@
         content.innerHTML = finalHtml;
       };
 
-      V.renderMovieDetail = function (data) {
+       V.renderMovieDetail = function (data, isFavorite) { 
         let content = document.querySelector("#movie-list-container");
-        content.innerHTML = MovieDetail.format(data);
+        content.innerHTML = MovieDetail.format(data, isFavorite); 
       };
+
 
 
     
