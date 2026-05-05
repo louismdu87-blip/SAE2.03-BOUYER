@@ -57,6 +57,46 @@ function addMoviesController(){
     }
 }
 
+function readFavoriteController(){
+    $profile = $_REQUEST['profile'];
+    $favorites = getAllFavorite($profile);
+
+    if (empty($favorites)) {
+        return ["La liste de favoris est vide."];
+    }
+
+    for ($i = 0; $i < count($favorites); $i++) {
+        $favorites[$i]->is_new = 0;
+        if (isset($favorites[$i]->date_ajout)) {
+            $dateDuFilm = strtotime($favorites[$i]->date_ajout);
+            if ($dateDuFilm >= $limite) {
+                $favorites[$i]->is_new = 1;
+            }
+        }
+    }
+    return $favorites;
+}
+
+function updateFavoriteController(){
+    $profile = $_REQUEST['profile'];
+    $movie = $_REQUEST['movie'];
+    $verification = readFavorite($profile, $movie);
+    
+    if ($verification > 0){
+        $ok = removeFavorite($profile, $movie);
+        if($ok != 0){
+            return "Retiré des favoris";
+        }
+        return false;
+    }
+    $ok = addFavorite($profile, $movie);
+    
+    if($ok != 0){
+        return "Ajouté au favoris";
+    }
+    return false;
+}
+
 
 function addProfileController(){
     $name = $_REQUEST['name'];

@@ -15,11 +15,14 @@
     <script type="module">
       import { DataMovie } from "./data/dataMovie.js";
       import { DataProfile } from "./data/dataProfile.js";
+      import { DataFavorite } from "./data/dataFavorite.js";
+
       import { NavBar } from "./component/NavBar/script.js";
       import { Movie } from "./component/Movies/script.js";
       import { MovieDetail } from "./component/MovieDetail/script.js";
       import { MovieCategory } from "./component/MovieCategory/script.js";
-  
+      import { MovieFavorite } from "./component/MovieFavorite/script.js";
+      
 
 
       //variables globales
@@ -55,31 +58,53 @@
         }
       };
 
-      C.handlerSelectProfile = async function () {
-  
-        currentProfileId = document.querySelector(".navbar__select").value;
-        let content = document.querySelector("#movie-list-container"); 
-        
-        if (!currentProfileId) {
-            content.innerHTML = "<h2 style='text-align:center; margin-top:3rem;'>Veuillez sélectionner un profil en haut.</h2>";
-            return;
+      C.handlerAddFavorite = async function (profile, movie) {
+        let result = await DataFavorite.updatefavorite(profile, movie);
+        let favorite = document.querySelector(".detail__favorite");
+
+        if (result == "Ajouté à la liste des favoris") {
+          favorite.classList.add("detail__favorite--select");
+          alert(result);
+        } else if (
+          result == "Retiré de la liste des favoris" ||
+          result == "Votre liste de favoris est vide"
+        ) {
+          favorite.classList.remove("detail__favorite--select");
+          alert(result);
+        } else {
+          alert(result);
         }
-        
-        let profileSelected = profiles.find(p => p.id == currentProfileId);
+      };
+
+      C.handlerSelectProfile = async function () {
+        currentProfileId = document.querySelector(".navbar__select").value;
+        let content = document.querySelector("#movie-list-container");
+
+        if (!currentProfileId) {
+          content.innerHTML =
+            "<h2 style='text-align:center; margin-top:3rem;'>Veuillez sélectionner un profil en haut.</h2>";
+          return;
+        }
+
+        let profileSelected = profiles.find((p) => p.id == currentProfileId);
         movies = await DataMovie.requestMovies(profileSelected.min_age);
         V.renderMoviesCategory(movies, "C.handlerMovieDetail");
       };
 
-    
       C.handlerLogOut = function () {
-        document.querySelector(".navbar__select").value = ""; 
-        currentProfileId = null; 
-        C.handlerSelectProfile(); 
+        document.querySelector(".navbar__select").value = "";
+        currentProfileId = null;
+        C.handlerSelectProfile();
       };
 
-
       C.start = function () {
-        V.renderNavBar("C.handlerAbout()", "C.handlerFilms()", "C.handlerSelectProfile()", profiles, "C.handlerLogOut()");
+        V.renderNavBar(
+          "C.handlerAbout()",
+          "C.handlerFilms()",
+          "C.handlerSelectProfile()",
+          profiles,
+          "C.handlerLogOut()",
+        );
         C.handlerSelectProfile();
       };
 
@@ -93,9 +118,21 @@
        * Elle sélectionne l'élément HTML avec l'ID "header" et y insère le contenu
        * formaté par le composant NavBar.
        */
-      V.renderNavBar = function (hAbout, hFilms, handlerSelect, data, handlerLogOut) {
+      V.renderNavBar = function (
+        hAbout,
+        hFilms,
+        handlerSelect,
+        data,
+        handlerLogOut,
+      ) {
         let header = document.querySelector("#header");
-        header.innerHTML = NavBar.format(hAbout, hFilms, handlerSelect, data, handlerLogOut);
+        header.innerHTML = NavBar.format(
+          hAbout,
+          hFilms,
+          handlerSelect,
+          data,
+          handlerLogOut,
+        );
       };
 
       V.renderMovies = function (movies) {
@@ -120,6 +157,17 @@
         content.innerHTML = MovieDetail.format(data);
       };
 
+      V.renderMoviesFavorite = function (handler, favoriteData) {
+        let content = document.querySelector("#movie-list-container");
+        let favo = Movies.format(favoriteData, handler);
+        content.innerHTML += MovieFavorite.format(favo);
+      };
+
+      V.renderMoviesHighlighted = function (handler, highlightedData) {
+        let content = document.querySelector("#movie-list-container");
+        let highlightCards = Movies.format(highlightedData, handler);
+        content.innerHTML += MoviesHighlighted.format(highlightCards);
+      };
       C.start();
     </script>
   </body>
