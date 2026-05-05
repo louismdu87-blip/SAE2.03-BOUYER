@@ -5,7 +5,7 @@
 
   <div class="movieDetail__content">
     <div class="movieDetail__poster">
-      <img src={{poster}} alt="Affiche de {{name}}" />
+      <img src="{{poster}}" alt="Affiche de {{name}}" />
     </div>
 
     <div class="movieDetail__info">
@@ -17,6 +17,14 @@
 
       <div class="movieDetail__synopsis">
         <p>{{description}}</p>
+      </div>
+      <div
+        class="movie-detail__actions"
+        style="margin-top: 2rem; text-align: center"
+      >
+        <button class="btn-favorite" onclick="{{handlerFavorite}}">
+          Ajouter aux favoris
+        </button>
       </div>
     </div>
   </div>

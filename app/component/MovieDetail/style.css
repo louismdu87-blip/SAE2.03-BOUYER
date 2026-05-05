@@ -69,18 +69,34 @@
   height: 100%;
 }
 
+.btn-favorite {
+    background-color: #e50914; /* Rouge type Netflix */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-favorite:hover {
+    background-color: #b20710;
+}
+
 /* --- VERSION DESKTOP (Affiche à gauche, Texte à droite) --- */
 @media (min-width: 48rem) {
   .movieDetail__content {
-    flex-direction: row; /* Aligne les éléments horizontalement */
+    flex-direction: row; 
     align-items: flex-start;
   }
   
   .movieDetail__poster {
-    flex: 0 0 35%; /* L'affiche prend 35% de la largeur */
+    flex: 0 0 35%; 
   }
   
   .movieDetail__info {
-    flex: 1; /* Le texte prend tout le reste de l'espace */
+    flex: 1; 
   }
 }
