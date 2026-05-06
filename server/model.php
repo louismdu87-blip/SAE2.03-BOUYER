@@ -69,6 +69,18 @@ function addProfile($name, $url, $age) {
     return $res;
 }
 
+function updateProfile($id, $name, $url, $age) {
+    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+    $sql = "UPDATE Profile SET name = :name, avatar = :url, min_age = :age WHERE id = :id";
+    $stmt = $cnx->prepare($sql);
+    $stmt->bindParam(':id', $id);
+    $stmt->bindParam(':name', $name);
+    $stmt->bindParam(':url', $url);
+    $stmt->bindParam(':age', $age);
+    $stmt->execute();
+    return $stmt->rowCount();
+}
+
 function getAllProfiles() {
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
     $sql = "SELECT id, name, avatar, min_age FROM Profile"; 

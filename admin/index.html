@@ -1,78 +1,130 @@
 <!doctype html>
 <html lang="fr">
-  <head>
-    <title>SAE2.03 ADMIN</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./css/base.css" />
-  </head>
-  <body>
-    <section id="log"></section>
 
-    <section id="addMovie"></section>
+<head>
+  <title>SAE2.03 ADMIN</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./css/base.css" />
+</head>
 
-    <section id="addProfile"></section>
+<body>
+  <section id="log"></section>
 
-    <script type="module">
-      import { Log } from "./component/Log/script.js";
-      import { NewMovieForm } from "./component/NewMovieForm/script.js";
-      import { ProfileForm } from "./component/ProfileForm/script.js";
-      import { DataMovie } from "./data/dataMovie.js";
-      import { DataProfile } from "./data/dataProfile.js";
-      import { EditProfile } from "./component/ModifyProfileForm/script.js";
+  <section id="addMovie"></section>
 
-      window.C = {};
+  <section id="addProfile"></section>
 
-      C.handlerAddMovie = async function () {
-        let form = document.querySelector(".addMovie__form");
-        if (form.reportValidity()) {
-          let fd = new FormData(form);
-          let res = await DataMovie.add(fd);
-          V.renderLog(res);
-        }
-        else {
-          V.renderLog("il y a une erreur dans le formulaire de film");
-      };
+  <script type="module">
+    import { Log } from "./component/Log/script.js";
+    import { NewMovieForm } from "./component/NewMovieForm/script.js";
+    import { ProfileForm } from "./component/ProfileForm/script.js";
+    import { DataMovie } from "./data/dataMovie.js";
+    import { DataProfile } from "./data/dataProfile.js";
+
+
+    window.C = {};
+
+    C.handlerAddMovie = async function () {
+      let form = document.querySelector(".addMovie__form");
+      if (form.reportValidity()) {
+        let fd = new FormData(form);
+        let res = await DataMovie.add(fd);
+        V.renderLog(res);
       }
+      else {
+        V.renderLog("il y a une erreur dans le formulaire de film");
+      };
+    }
 
-       C.handlerAddProfile = async function () {
-        let form = document.querySelector(".form__addprofile");
-        if (form.reportValidity()) {
+    C.handlerAddProfile = async function () {
+      let form = document.querySelector(".form__addprofile");
+      if (form.reportValidity()) {
         let fd = new FormData(form);
         let res = await DataProfile.addprofile(fd);
         V.renderLog(res);
-        }
-        else {
-          V.renderLog("il y a une erreur dans le formulaire de profil");
-      };
       }
-      C.start = function () {
-        V.renderLog("Démarrage de l'application");
-        V.renderNewMovieForm("C.handlerAddMovie()");
-        V.renderProfileForm("C.handlerAddProfile()");
-        
-        
+      else {
+        V.renderLog("il y a une erreur dans le formulaire de profil");
       };
-
-      window.V = {};
-
-      V.renderLog = function (txt) {
-        let content = document.querySelector("#log");
-        content.innerHTML = Log.format(txt);
-      };
-
-      V.renderNewMovieForm = function (handler) {
-        let content = document.querySelector("#addMovie");
-        content.innerHTML = NewMovieForm.format(handler);
-      };
-
-      V.renderProfileForm = function (handler) {
-        let content = document.querySelector("#addProfile");
-        content.innerHTML = ProfileForm.format(handler);
-      };
+    }
+    C.start = function () {
+      V.renderLog("Démarrage de l'application");
+      V.renderNewMovieForm("C.handlerAddMovie()");
+      V.renderProfileForm("C.handlerAddProfile()");
 
 
-      C.start();
-    </script>
-  </body>
+    };
+
+    C.handlerSelectProfile = function () {
+      let select = document.querySelector("#profile_selector");
+      let form = document.querySelector("#profileForm");
+      let id = select.value;
+
+      if (id === "") {
+        // Mode CRÉATION
+        form.reset();
+        document.querySelector("#todo_action").value = "addprofile";
+        document.querySelector("#profile_id").value = "";
+      } else {
+        let selectedOption = select.options[select.selectedIndex];
+
+        document.querySelector("#todo_action").value = "updateprofile";
+        document.querySelector("#profile_id").value = id;
+        document.querySelector("#profile_name").value = selectedOption.text; 
+        document.querySelector("#profile_avatar").value = selectedOption.dataset.avatar;
+        document.querySelector("#profile_age").value = selectedOption.dataset.age;      
+      }
+    };
+
+    C.handlerSubmitProfile = async function () {
+      let form = document.querySelector("#profileForm");
+      if (form.reportValidity()) {
+        let fd = new FormData(form);
+        let action = document.querySelector("#todo_action").value;
+
+        let res;
+        if (action === "addprofile") {
+          res = await DataProfile.addprofile(fd);
+        } else {
+          res = await DataProfile.updateProfile(fd);
+        }
+
+        V.renderLog(res);
+        C.start();
+      } else {
+        V.renderLog("Il y a une erreur dans le formulaire de profil");
+      }
+    };
+    C.start = async function () {
+      V.renderLog("Démarrage de l'application");
+      V.renderNewMovieForm("C.handlerAddMovie()");
+    
+      let profiles = await DataProfile.readProfiles();
+    
+      V.renderProfileForm(profiles, "C.handlerSubmitProfile()", "C.handlerSelectProfile()");
+    };
+
+    window.V = {};
+
+    V.renderLog = function (txt) {
+      let content = document.querySelector("#log");
+      content.innerHTML = Log.format(txt);
+    };
+
+    V.renderNewMovieForm = function (handler) {
+      let content = document.querySelector("#addMovie");
+      content.innerHTML = NewMovieForm.format(handler);
+    };
+
+    V.renderProfileForm = function (profiles, handlerSubmit, handlerChange) {
+      let content = document.querySelector("#addProfile");
+      content.innerHTML = ProfileForm.format(profiles, handlerSubmit, handlerChange);
+    };
+
+
+    C.start();
+  </script>
+</body>
+
 </html>

@@ -75,6 +75,26 @@ function addProfileController(){
     }
 }
 
+function updateProfileController() {
+    $id = $_REQUEST['id'];
+    $name = $_REQUEST['name'];
+    $url = $_REQUEST['avatar'];
+    $age = $_REQUEST['age'];
+
+    if(empty($url)){
+        $url = "placeholderProfile.svg";
+    }
+
+    $ok = updateProfile($id, $name, $url, $age);
+    
+    if($ok != 0){
+        return "Le profil de $name a été mis à jour";
+    }
+    else {
+        return false;
+    }
+}
+
 function readProfilesController() {
     return getAllProfiles();
 }

@@ -2,17 +2,28 @@ let HOST_URL = "https://mmi.unilim.fr/~bouyer17/SAE2.03-BOUYER"; // CHANGE THIS 
 
 let DataProfile = {};
 
-
-
 DataProfile.addprofile = async function(fdata){
     let config = {
         method: "POST",
         body: fdata
     };
-    let anwser = await fetch(HOST_URL + "/server/script.php?todo=addprofile", config)
-    let data = await anwser.json();
+    let answer = await fetch(HOST_URL + "/server/script.php?todo=addprofile", config);
+    return await answer.json();
+};
+
+DataProfile.readProfiles = async function() {
+    let answer = await fetch(HOST_URL + "/server/script.php?todo=readprofiles"); 
+    let data = await answer.json();
     return data;
-}
+};
 
-export {DataProfile};
+DataProfile.updateProfile = async function(fdata) {
+    let config = {
+        method: "POST",
+        body: fdata
+    };
+    let answer = await fetch(HOST_URL + "/server/script.php", config);
+    return await answer.json();
+};
 
+export { DataProfile };

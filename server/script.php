@@ -90,6 +90,10 @@ if ( isset($_REQUEST['todo']) ){
       $data = addFavoriteController();
       break;
 
+    case 'updateprofile':
+      $data = updateProfileController();
+      break;
+
     case 'deleteFavorite':
       $data = deleteFavoriteController();
       break;
