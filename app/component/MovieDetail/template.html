@@ -1,46 +1,56 @@
 <div class="movieDetail">
-  <header class="movieDetail__header">
-    <h1 class="movieDetail__title">{{name}}</h1>
-  </header>
+  <!-- Arrière-plan flouté/dégradé -->
+  <div class="movieDetail__bg" style="background-image: url('{{poster}}');"></div>
 
-  <div class="movieDetail__content">
+  <!-- Conteneur principal -->
+  <div class="movieDetail__container">
+    
+    <!-- 1. Affiche (Cachée sur mobile) -->
     <div class="movieDetail__poster">
       <img src="{{poster}}" alt="Affiche de {{name}}" />
     </div>
 
-    <div class="movieDetail__info">
-      <p><strong>Catégorie: </strong>{{category}}</p>
-      <p><strong>Durée: </strong>{{length}} minutes</p>
-      <p><strong>Date de sortie: </strong>{{year}}</p>
-      <p><strong>Réalisateur: </strong> {{director}}</p>
-      <p><strong>Âge minimum: </strong> {{min_age}} ans</p>
+    <!-- 2. Titre -->
+    <h1 class="movieDetail__title">{{name}}</h1>
 
+    <!-- 3. Actions (Boutons Achat + Favoris) -->
+    <div class="movieDetail__actions">
+      <button class="movieDetail__btn-buy">Acquista da 13,99 €</button>
+      <div class="movieDetail__icons">
+        <button class="movieDetail__btn-icon">
+          <!-- Fausse icône pouce pour le visuel -->
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg>
+        </button>
+        <div class="movieDetail_favoris">
+          {{btnFavoris}}
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Ligne de séparation (Mobile uniquement) -->
+    <hr class="movieDetail__divider" />
+
+    <!-- 5. Informations (Texte) -->
+    <div class="movieDetail__info">
+      <p class="movieDetail__meta">
+        <strong>VM{{min_age}}, {{year}}, {{length}} Min</strong><br>
+        <strong>{{category}}</strong>
+      </p>
+      <p><strong>Regia:</strong> {{director}}</p>
+      
       <div class="movieDetail__synopsis">
+        <strong>Trama</strong>
         <p>{{description}}</p>
       </div>
     </div>
-  </div>
-  <div class="movieDetail_favoris">
-   {{btnFavoris}}
-  </div>
 
-  <div class="movieDetail__trailer">
-    <div class="video-container">
-      <iframe
-        src="{{trailer}}"
-        title="YouTube video player"
-        frameborder="0"
-        allow="
-          accelerometer;
-          autoplay;
-          clipboard-write;
-          encrypted-media;
-          gyroscope;
-          picture-in-picture;
-        "
-        allowfullscreen
-      >
-      </iframe>
+    <!-- 6. Trailer -->
+    <div class="movieDetail__trailer">
+      <h3>Trailer e video extra</h3>
+      <div class="video-container">
+        <iframe src="{{trailer}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
     </div>
+
   </div>
 </div>
