@@ -34,11 +34,6 @@
       // Une fois l'application terminée, on pourrait remettre let C.
       window.C = {};
 
-      C.handlerAbout = function () {
-        alert(
-          "Ceci est une base de projet pour la SAE2.03 édition 2025. Bonne chance !",
-        );
-      };
 
       C.handlerFilms = function () {
         if (!currentProfileId) {
@@ -122,7 +117,6 @@
 
       C.start = function () {
         V.renderNavBar(
-          "C.handlerAbout()",
           "C.handlerFilms()",
           "C.handlerFavorites()",
           "C.handlerSelectProfile()",
@@ -143,7 +137,6 @@
        * formaté par le composant NavBar.
        */
       V.renderNavBar = function (
-        hAbout,
         hFilms,
         hFavorites,
         handlerSelect,
@@ -152,7 +145,6 @@
       ) {
         let header = document.querySelector("#header");
         header.innerHTML = NavBar.format(
-          hAbout,
           hFilms,
           hFavorites,
           handlerSelect,
