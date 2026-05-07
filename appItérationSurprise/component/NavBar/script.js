@@ -6,9 +6,8 @@ let templateProfile = await templateFileProfile.text();
 let NavBar = {};
 
 
-NavBar.format = function (hAbout, hFilms, hFavorites, handlerSelect, data, handlerLogOut) {
+NavBar.format = function ( hFilms, hFavorites, handlerSelect, data, handlerLogOut) {
   let html = template;
-  html = html.replace("{{hAbout}}", hAbout);
   html = html.replaceAll("{{hFilms}}", hFilms);
   html = html.replace("{{hFavorites}}", hFavorites);
   html = html.replaceAll("{{handlerSelect}}", handlerSelect);

@@ -1,0 +1,241 @@
+#header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.nav__container {
+  width: 100%;
+  height: 3.5rem;
+  padding: 0 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-main);
+}
+
+.nav__left {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.nav__icon-btn {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: none;
+  color: var(--color-text);
+  padding: 0;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.nav__icon-btn:hover {
+  color: var(--color-brand);
+}
+
+.logo {
+  height: 1.8rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.burger {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: var(--color-text);
+  z-index: 10;
+}
+
+.burger__line {
+  stroke: currentColor;
+  stroke-width: 2;
+  transition:
+    translate 0.2s ease-in-out 0.4s,
+    rotate 0.2s ease-in-out 0.2s,
+    opacity 0.2s ease-in-out 0.4s;
+}
+
+.burger__line:nth-child(1) {
+  --_trans: 0 9px;
+  --_rotate: 45deg;
+  transform-origin: 16px 7px;
+}
+.burger__line:nth-child(3) {
+  --_trans: 0 -9px;
+  --_rotate: -45deg;
+  transform-origin: 16px 25px;
+}
+
+/* Cache la case à cocher technique */
+.sr-only {
+  position: absolute;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+
+[type="checkbox"]:checked ~ .nav__left .burger .burger__line {
+  translate: var(--_trans);
+  rotate: var(--_rotate);
+  transition:
+    translate 0.2s ease-in-out 0.2s,
+    rotate 0.2s ease-in-out 0.4s,
+    opacity 0.2s ease-in-out;
+}
+
+[type="checkbox"]:checked ~ .nav__left .burger .burger__line:nth-child(2) {
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.navbar {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  left: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.4s ease-in-out,
+    visibility 0.4s;
+  padding: 1.5rem 2rem;
+  background-color: var(--color-bg);
+  border-top: 1px solid var(--color-fg);
+}
+
+[type="checkbox"]:checked ~ .navbar {
+  opacity: 1;
+  visibility: visible;
+}
+
+.navbar__list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar__item {
+  color: var(--color-text-muted);
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.navbar__item:hover {
+  color: var(--color-brand);
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 1rem;
+  
+}
+
+.navbar__select {
+  background-color: var(--color-fg);
+  color: var(--color-text);
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 20px;
+  font-family: var(--font-main);
+  outline: none;
+  cursor: pointer;
+}
+
+.navbar__btn {
+  background-color: transparent;
+  color: var(--color-brand);
+  border: 2px solid var(--color-brand);
+  padding: 0.6rem 1.5rem;
+  border-radius: 25px;
+  font-family: var(--font-main);
+  font-weight: var(--fw-bold);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.navbar__btn:hover {
+  background-color: var(--color-brand);
+  color: var(--color-bg);
+}
+
+
+@media (min-width: 64rem) {
+  .nav__container {
+    height: 4rem; 
+    padding: 0 3rem;
+  }
+
+  .navbar {
+    display: flex;
+    flex: 1;
+    position: static;
+    opacity: 1;
+    visibility: visible;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    height: 100%; 
+  }
+
+  .navbar__list {
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    margin-left: 2rem;
+    height: 100%;
+  }
+
+  .burger {
+    display: none;
+  }
+
+  .nav__icon-btn {
+    display: none;
+  }
+
+  .navbar__item {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    position: relative;
+    padding: 0 0.5rem;
+    font-size: 1rem;
+    
+  }
+
+
+
+  .navbar__item--right {
+    margin-left: auto;
+  }
+
+  .navbar__item--right:after {
+    display: none;
+  }
+
+  .profile {
+    flex-direction: row;
+    align-items: center;
+    width: auto;
+  }
+}

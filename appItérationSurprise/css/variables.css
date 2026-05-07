@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+
+:root {
+    /* Couleurs Chili */
+    --color-bg: #1a1a1e;       
+    --color-fg: #222228;
+    --color-bg-movies: #1a1c28;  
+    --color-brand: #4ce5b1;    
+    --color-text: #ffffff;
+    --color-text-muted: #a0a0a0;
+
+    /* Typographie */
+    --font-title-movie: 'Oswald';
+    --font-main: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --fw-normal: 400;
+    --fw-bold: 700;
+}

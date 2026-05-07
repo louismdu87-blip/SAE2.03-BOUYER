@@ -1,73 +1,46 @@
 <div class="movieDetail">
-  <div
-    class="movieDetail__bg"
-    style="background-image: url('{{poster}}');"
-  ></div>
+  <header class="movieDetail__header">
+    <h1 class="movieDetail__title">{{name}}</h1>
+  </header>
 
-  <div class="movieDetail__container">
-    <div class="movieDetail__main-row">
-      <div class="movieDetail__poster">
-        <img src="{{poster}}" alt="Affiche de {{name}}" />
-      </div>
+  <div class="movieDetail__content">
+    <div class="movieDetail__poster">
+      <img src="{{poster}}" alt="Affiche de {{name}}" />
+    </div>
 
-      <div class="movieDetail__content">
-        <h1 class="movieDetail__title">{{name}}</h1>
+    <div class="movieDetail__info">
+      <p><strong>Catégorie: </strong>{{category}}</p>
+      <p><strong>Durée: </strong>{{length}} minutes</p>
+      <p><strong>Date de sortie: </strong>{{year}}</p>
+      <p><strong>Réalisateur: </strong> {{director}}</p>
+      <p><strong>Âge minimum: </strong> {{min_age}} ans</p>
 
-        <div class="movieDetail__actions">
-          <button class="movieDetail__btn-buy">Acheter</button>
-          <div class="movieDetail__icons">
-            <button class="movieDetail__btn-icon">
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path
-                  d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"
-                ></path>
-              </svg>
-            </button>
-            <div class="movieDetail_favoris">{{btnFavoris}}</div>
-          </div>
-        </div>
-
-        <hr class="movieDetail__divider" />
-
-        <div class="movieDetail__info">
-          <p class="movieDetail__meta">
-            <strong>{{min_age}}, {{year}}, {{length}} Min</strong><br />
-            <strong>{{category}}</strong>
-          </p>
-          <p><strong>Réalisateur:</strong> {{director}}</p>
-
-          <div class="movieDetail__synopsis">
-            <strong>Synopsis</strong>
-            <p>{{description}}</p>
-          </div>
-        </div>
+      <div class="movieDetail__synopsis">
+        <p>{{description}}</p>
       </div>
     </div>
-    <div class="movieDetail__trailer">
-      <h3>Trailer</h3>
-      <div class="video-container">
-        <iframe
-          src="{{trailer}}"
-          title="YouTube video player"
-          frameborder="0"
-          allow="
-            accelerometer;
-            autoplay;
-            clipboard-write;
-            encrypted-media;
-            gyroscope;
-            picture-in-picture;
-          "
-          allowfullscreen
-        ></iframe>
-      </div>
+  </div>
+  <div class="movieDetail_favoris">
+   {{btnFavoris}}
+  </div>
+
+  <div class="movieDetail__trailer">
+    <div class="video-container">
+      <iframe
+        src="{{trailer}}"
+        title="YouTube video player"
+        frameborder="0"
+        allow="
+          accelerometer;
+          autoplay;
+          clipboard-write;
+          encrypted-media;
+          gyroscope;
+          picture-in-picture;
+        "
+        allowfullscreen
+      >
+      </iframe>
     </div>
   </div>
 </div>

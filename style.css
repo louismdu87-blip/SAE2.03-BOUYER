@@ -1,0 +1,101 @@
+
+      
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #141414; 
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #aaa;
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+        }
+
+        .links-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .link-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 250px;
+            height: 150px;
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+       
+        .app-card {
+            background-color: #750106; 
+            color: white;
+        }
+        .app-card-surprise {
+            background-color: #E50914; 
+            color: white;
+        }
+
+        .app-card:hover  {
+            transform: scale(1.05);
+            background-color: #f40612;
+        }
+
+         .app-card-surprise:hover  {
+            transform: scale(1.05);
+            background-color: #750106; 
+        }
+
+        /* Style pour le bouton Admin */
+        .admin-card {
+            background-color: #2b2b2b;
+            color: white;
+            border: 1px solid #444;
+        }
+
+        .goaccess-card{
+            background-color: #2b2b2b;
+            color: #ffffff;
+            border: solid 1px #444;
+        }
+
+        .admin-card:hover {
+            transform: scale(1.05);
+            background-color: #383838;
+        }
+
+        .goaccess-card:hover {
+            transform: scale(1.05);
+            background-color: #555555;
+        }
+
+        .icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+   
