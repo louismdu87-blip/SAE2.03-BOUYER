@@ -1,247 +1,267 @@
-/* =========================================
-   1. BASE ET ARRIÈRE-PLAN
-   ========================================= */
+
 .movieDetail {
-    position: relative;
-    background-color: var(--color-bg); 
-    color: var(--color-text); 
-    min-height: 100vh;
-    font-family: var(--font-main); 
-    font-weight: var(--fw-normal); 
+  position: relative;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  min-height: 100vh;
+  font-family: var(--font-main);
+  font-weight: var(--fw-normal);
 }
 
 .movieDetail__bg {
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 65vh; /* Légèrement plus haut pour correspondre à l'image */
-    background-size: cover;
-    background-position: center top;
-    z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 65vh;
+  background-size: cover;
+  background-position: center top;
+  z-index: 1;
 }
 
 .movieDetail::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 65vh;
-    background: linear-gradient(to bottom, transparent 15%, var(--color-bg) 85%, var(--color-bg) 100%);
-    z-index: 2;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 65vh;
+  background: linear-gradient(
+    to bottom,
+    transparent 15%,
+    var(--color-bg) 85%,
+    var(--color-bg) 100%
+  );
+  z-index: 2;
 }
 
-/* =========================================
-   2. VERSION MOBILE (Grille CSS précise)
-   ========================================= */
-
-.movieDetail__poster { display: none; }
+.movieDetail__poster {
+  display: none;
+}
 
 .movieDetail__container {
-    position: relative;
-    z-index: 3;
-    padding: 1.25rem; /* Marge standard de 20px sur les côtés */
-    padding-top: 55vw; /* Pousse le texte exactement sous le masque */
-    
-    display: grid;
-    grid-template-columns: 1fr; 
-    gap: 1.25rem; /* Espace global sur mobile */
-    grid-template-areas:
-        "title"
-        "actions"
-        "divider"
-        "info"
-        "trailer";
+  position: relative;
+  z-index: 3;
+  padding: 1.25rem;
+  padding-top: 25rem;
+  
 }
 
-/* Affectation des zones */
-.movieDetail__title   { grid-area: title; }
-.movieDetail__actions { grid-area: actions; }
-.movieDetail__divider { grid-area: divider; }
-.movieDetail__info    { grid-area: info; }
-.movieDetail__trailer { grid-area: trailer; }
-
-/* Typographie et marges internes */
-.movieDetail__title { 
-    font-size: 2rem; 
-    margin: 0; 
-    text-transform: uppercase; 
-    font-weight: var(--fw-bold); 
-    text-align: left; /* Aligné à gauche comme sur la photo */
+.movieDetail__content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
 }
 
-.movieDetail__divider { 
-    border: none; 
-    border-top: 1px solid rgba(255, 255, 255, 0.2); 
-    width: 100%; 
-    margin: 0.5rem 0; /* Un peu d'air autour de la ligne */
+
+.movieDetail__title {
+  font-size: 2rem;
+  text-transform: uppercase;
+  font-family: var(--font-title-movie);
+  font-weight: var(--fw-normal);
+  text-align: left;
+  margin: 0;
 }
 
-/* Zone Actions (Bouton + Icônes) */
+.movieDetail__divider {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  width: 100%;
+  margin: 0;
+}
+
+
 .movieDetail__actions {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
 }
 
 .movieDetail__btn-buy {
-    background-color: var(--color-brand); 
-    color: var(--color-bg); 
-    padding: 0.875rem;
-    border-radius: 25px;
-    font-weight: var(--fw-bold); 
-    font-size: 1.1rem;
-    border: none;
-    cursor: pointer;
-    width: 100%;
+  background-color: var(--color-brand);
+  color: var(--color-bg);
+  padding: 0.875rem;
+  border-radius: 25px;
+  font-weight: var(--fw-bold);
+  font-size: 1.1rem;
+  border: none;
+  cursor: pointer;
+  width: 100%;
 }
 
 .movieDetail__icons {
-    display: flex;
-    justify-content: center;
-    gap: 2.5rem; /* Écartement exact de la photo mobile */
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
 }
 
 .movieDetail__btn-icon,
 .movieDetail_favoris button {
-    background: transparent !important;
-    border: none;
-    color: var(--color-text); 
-    cursor: pointer;
-    padding: 0;
+  background: transparent !important;
+  border: none;
+  color: var(--color-text);
+  cursor: pointer;
+  padding: 0;
 }
 
-/* Zone Info (Texte) */
 .movieDetail__info {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem; /* Espace entre les paragraphes de texte */
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .movieDetail__info p {
-    color: var(--color-text); 
-    line-height: 1.5;
-    margin: 0;
-    font-size: 0.95rem;
+  color: var(--color-text);
+  line-height: 1.5;
+  margin: 0;
+  font-size: 0.95rem;
 }
 
 .movieDetail__meta strong,
 .movieDetail__info strong {
-    font-weight: var(--fw-bold); 
+  font-weight: var(--fw-bold);
 }
 
 .movieDetail__synopsis {
-    margin-top: 0.5rem;
+  margin-top: 0.5rem;
 }
 .movieDetail__synopsis p {
-    margin-top: 0.25rem;
+  margin-top: 0.25rem;
 }
 
-/* Zone Trailer */
+/* Trailer */
 .movieDetail__trailer {
-    margin-top: 1rem;
+  margin-top: 2rem;
 }
 
 .movieDetail__trailer h3 {
-    font-size: 1.25rem;
-    margin: 0 0 1rem 0;
-    font-weight: var(--fw-bold); 
+  font-family: var(--font-title-movie);
+  font-size: 1.25rem;
+  margin: 0 0 1rem 0;
 }
 
 .video-container {
-    position: relative;
-    padding-bottom: 56.25%; 
-    border-radius: 8px;
-    overflow: hidden;
-    background: #000;
+  position: relative;
+  padding-bottom: 56.25%;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #000;
 }
 
 .video-container iframe {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
 }
 
-/* =========================================
-   3. VERSION DESKTOP (Symétrie Parfaite)
-   ========================================= */
-@media (min-width: 64rem) { 
+@media (min-width: 64rem) {
+  .movieDetail__bg,
+  .movieDetail::before {
+    height: 100%;
+  }
 
-    .movieDetail__bg,
-    .movieDetail::before { height: 100%; }
+  .movieDetail::before {
+    background: linear-gradient(
+      to right,
+      var(--color-bg) 0%,
+      rgba(26, 26, 30, 0.8) 35%,
+      rgba(26, 26, 30, 0.6) 75%,
+      var(--color-bg) 100%
+    );
+  }
 
-    .movieDetail::before {
-        background: linear-gradient(to right, var(--color-bg) 0%, rgba(26, 26, 30, 0.8) 35%, transparent 55%, rgba(26, 26, 30, 0.6) 75%, var(--color-bg) 100%); 
-    }
+  .movieDetail__container {
+    width: 100%;
+    padding: 0rem 0rem 4rem 0rem;
+  }
 
-  
-    
-    .movieDetail__container {
-        width: 100%;             
-             
-               
-        
-       
-        padding: 6rem 5rem 4rem 5rem; 
-        
-        /* --- LA GRILLE --- */
-        display: grid;
-        grid-template-columns: 18rem 1fr auto; 
-        column-gap: 3.5rem; 
-        row-gap: 0; 
-        
-        grid-template-areas:
-            "poster title   actions"
-            "poster info    actions"
-            "trailer trailer trailer";
-    }
+  .movieDetail__main-row {
+    display: flex;
+    flex-direction: row;
+    gap: 3.5rem;
+    width: 100%;
+    padding-top: 6rem;
+    padding-left: 5rem;
+    padding-right: 6rem;
+    background: linear-gradient(
+      to bottom,
+      transparent 15%,
+      var(--color-bg) 85%,
+      var(--color-bg) 100%
+    );
+  }
 
-    /* --- PLACEMENT DANS LA GRILLE --- */
-    .movieDetail__poster { 
-        grid-area: poster; 
-        display: block; 
-    }
+  .movieDetail__poster {
+    display: flex;
+  }
 
-    .movieDetail__poster img {
-        width: 100%;
-        border-radius: 8px;
-        box-shadow: 0 1rem 3rem rgba(0,0,0,0.8);
-    }
+  .movieDetail__poster img {
+    width: 100%;
+    max-width: 20rem;
+    max-height: 30rem;
+    border-radius: 8px;
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.8);
+  }
 
-    .movieDetail__divider { display: none; }
+  .movieDetail__content {
+    display: flex;
+    position: relative;
+    flex: 1;
+    height: 100%;
+    margin-right: 5rem;
+  }
 
-    .movieDetail__title { 
-        grid-area: title;
-        font-size: 3.2rem; 
-        margin-top: -0.5rem; /* Aligne le haut du texte avec le haut de l'affiche */
-        margin-bottom: 1.5rem;
-    }
-    
-    .movieDetail__info { 
-        grid-area: info;
-        max-width: 45rem; 
-    }
-    
-    /* Le bloc des actions vient s'écraser tout à droite de sa colonne */
-    .movieDetail__actions { 
-        grid-area: actions;
-        justify-self: end;  /* Pousse le bouton au bord droit absolu du conteneur */
-        padding-top: 0.5rem; 
-        display: flex;
-        flex-direction: column;
-        align-items: center; /* Centre les icônes sous le bouton */
-        gap: 1.5rem;
-    }
+  .movieDetail__title {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
 
-    .movieDetail__btn-buy {
-        width: 16rem; 
-    }
+  .movieDetail__divider {
+    display: none;
+  }
 
-    .movieDetail__trailer { 
-        grid-area: trailer;
-        max-width: 50rem; 
-        margin-top: 5rem; 
-    }
+  .movieDetail__actions {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 0;
+    height: 100%;
+    width: 16rem;
+    gap: 1.5rem;
+  }
 
-    .movieDetail__trailer h3 {
-        font-size: 1.5rem;
-    }
+  .movieDetail__btn-buy {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 20rem;
+    width: 100%;
+    height: 2.5rem;
+  }
+
+  .movieDetail__btn-buy:hover {
+    filter: brightness(120%);
+  }
+
+  .movieDetail__trailer {
+    max-width: 50rem;
+    padding-left: 5rem;
+  }
+
+  .movieDetail__trailer h3 {
+    font-family: var(--font-title-movie);
+    font-size: 1.5rem;
+    font-weight: 400;
+  }
+
+  .video-container {
+    transition: all 0.3s;
+  }
+
+  .video-container:hover {
+    transform: scale(1.06);
+  }
 }

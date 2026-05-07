@@ -1,17 +1,48 @@
-<nav class="navbar font-sans">
-  <ul class="navbar__list">
-    <li class="navbar__item" onclick="{{hAbout}}">About</li>
-    <li class="navbar__item" onclick="{{hFilms}}">Films</li>
-    <li class="navbar__item" onclick="{{hFavorites}}">Favoris</li>
-  </ul>
-  <div class="navbar__profile">
-    <select class="navbar__select" onchange="{{handlerSelect}}">
-      <option value="">Changer de profil...</option>
-      {{profiles}}
-    </select>
+<nav class="nav__container">
+  
+  <input type="checkbox" id="mobile-menu-toggle" class="sr-only">
 
-    <button class="navbar__btn logout" onclick="{{handlerLogOut}}">
-      Déconnexion
+  <div class="nav__left">
+    <label for="mobile-menu-toggle" class="burger">
+      <svg width="32" height="32" viewBox="0 0 32 32">
+        <line class="burger__line" x1="4" y1="7" x2="28" y2="7" stroke="currentColor" stroke-width="2"/>
+        <line class="burger__line" x1="4" y1="16" x2="28" y2="16" stroke="currentColor" stroke-width="2"/>
+        <line class="burger__line" x1="4" y1="25" x2="28" y2="25" stroke="currentColor" stroke-width="2"/>
+      </svg>
+    </label>
+
+    <div class="logo">
+      <img src="{{image}}" alt="CHILI logo" />
+    </div>
+  </div>
+
+  <div class="nav__right">
+
+    <button class="nav__icon-btn">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="16" fill="#363645"/>
+        <circle cx="16" cy="11" r="4.5" fill="#d1d1d6"/>
+        <path d="M7.5 25.5C7.5 21 11 18 16 18c5 0 8.5 3 8.5 7.5" stroke="#d1d1d6" stroke-width="3" stroke-linecap="round"/>
+      </svg>
     </button>
   </div>
+
+  <div class="navbar">
+    <ul class="navbar__list">
+      <li class="navbar__item" onclick="{{hAbout}}">About</li>
+      <li class="navbar__item" onclick="{{hFilms}}">Films</li>
+      <li class="navbar__item" onclick="{{hFavorites}}">Favoris</li>
+      
+      <li class="navbar__item navbar__item--right">
+        <div class="profile">
+          <select class="navbar__select" onchange="{{handlerSelect}}">
+            <option value="">Changer de profil...</option>
+            {{profiles}}
+          </select>
+          <button class="navbar__btn logout" onclick="{{handlerLogOut}}">Déconnexion</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+
 </nav>
