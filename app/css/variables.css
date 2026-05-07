@@ -3,7 +3,8 @@
 :root {
     /* Couleurs Chili */
     --color-bg: #1a1a1e;       
-    --color-fg: #222228;  
+    --color-fg: #222228;
+    --color-bg-movies: #1a1c28;  
     --color-brand: #4ce5b1;    
     --color-text: #ffffff;
     --color-text-muted: #a0a0a0;
